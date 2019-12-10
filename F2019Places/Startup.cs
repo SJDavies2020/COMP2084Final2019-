@@ -47,6 +47,16 @@ namespace F2019Places
                 .AddEntityFrameworkStores<f19Context>()
                 .AddDefaultTokenProviders();
 
+            var ClientId = Configuration.GetSection("Google")["ClientId"];
+            var ClientSecret = Configuration.GetSection("Google")["ClientSecret"];
+
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = ClientId;
+                    options.ClientSecret = ClientSecret;
+                });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

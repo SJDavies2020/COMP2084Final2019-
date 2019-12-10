@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<F2019Places.Models.Destination>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Destination Listings";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Destination Listings</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,6 +13,12 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -22,18 +28,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Region)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+               <img src="~/img/" + @Html.DisplayFor(modelItem => item.Photo) />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region.Name)
+            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -42,12 +49,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Photo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Region.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.DestinationId">Edit</a> |

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using F2019Places.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace F2019Places.Controllers
 {
@@ -18,10 +19,13 @@ namespace F2019Places.Controllers
             _context = context;
         }
 
+        [Authorize]
         // GET: Regions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Region.ToListAsync());
+            // add order by to display products a-z: .OrderBy(p => p.Name)
+            var myRegions = _context.Region.OrderBy(p => p.Name);
+            return View("Index",await myRegions.ToListAsync());
         }
 
         // GET: Regions/Details/5

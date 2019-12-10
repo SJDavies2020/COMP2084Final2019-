@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using F2019Places.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace F2019Places.Controllers
 {
@@ -17,6 +18,7 @@ namespace F2019Places.Controllers
         {
             _context = context;
         }
+        [Authorize]
 
         // GET: Destinations
         public async Task<IActionResult> Index()
